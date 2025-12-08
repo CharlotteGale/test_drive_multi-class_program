@@ -1,5 +1,6 @@
 from lib.diary import *
 from lib.diary_entry import *
+from tests.helpers import *
 import pytest
 
 def test_entries_list_created_on_init():
@@ -39,3 +40,18 @@ def test_returns_list_of_diary_instances():
     diary.add(diary_entry4)
 
     assert diary.all() == [diary_entry1, diary_entry2, diary_entry3, diary_entry4]
+
+@pytest.mark.skip(reason="Waiting for DiaryEntry.count_words()")
+def test_word_count_of_diary_entry_contents():
+    """
+    When count_words is called
+    Return an integer of the summation of all diary_entry.contents
+    """
+    diary = Diary()
+    diary_entry1 = DiaryEntry("title1", generate_contents(500))
+    diary_entry2 = DiaryEntry("title2", generate_contents(250))
+
+    diary.add(diary_entry1)
+    diary.add(diary_entry2)
+
+    assert diary.count_words() == 750

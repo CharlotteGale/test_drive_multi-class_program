@@ -10,4 +10,9 @@ class Diary():
     def all(self):
         return self.entries
 
+    def count_words(self):
+        total = 0
+        for entry in self.entries:
+            total += entry.count_words()
+        return total
     
