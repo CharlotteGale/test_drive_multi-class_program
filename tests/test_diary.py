@@ -55,3 +55,4 @@ def test_word_count_of_diary_entry_contents():
     diary.add(diary_entry2)
 
     assert diary.count_words() == 750
+
