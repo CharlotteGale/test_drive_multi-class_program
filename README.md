@@ -123,89 +123,6 @@ class DiaryEntry:
 ## Example Tests
 ```python
 """
-Given a title and contents
-Check params are stored to the instance
-"""
-diary_entry = DiaryEntry("title", "contents")
-
-assert diary_entry.title == "title"
-assert diary_entry.contents == "contents"
-```
-
-```python
-"""
-Given a title and contents
-Returns the word count of contents
-"""
-diary_entry = DiaryEntry("Wed 3 Dec", "50 words")
-
-assert diary_entry.count_words() == 50
-```
-
-```python
-"""
-Given an int representing words per minute
-Returns an estimated reading time for the contents
-"""
-diary_entry = DiaryEntry("Wed 3 Dec", "500 words.")
-
-assert diary_entry.reading_time(100) == 5.0
-assert diary_entry.reading_time(250) == 2.5
-assert diary_entry.reading_time(500) == 1.0
-```
-
-```python
-"""
-Given an int for reading words per minute and an int for minutes available to read
-returns a snippet of the contents that the reader can read in the available time to read
-"""
-diary_entry = DiaryEntry("Wed 3 Dec", "500 words.")
-
-assert diary_entry.reading_chunk(10, 5) == "First 50 words"
-
-"""
-Continuation of the above test
-Returns a block of text, but skips what has already been given until the contents has been fully passed to user.
-"""
-assert diary_entry.reading_chunk(10, 5) == "Next 50 words"
-
-assert diary_entry.reading_chunk(10, 10) == "Next 100 words"
-
-assert diary_entry.reading_chunk(10, 10) == "Next 100 words"
-
-assert diary_entry.reading_chunk(10, 20) == "Final 200 words"
-
-"""
-Continuation of the initial test
-Once all contents has been given, it should return to the start
-"""
-assert diary_entry.reading_chunk(10, 5) == "First 50 words"
-```
-
-```python
-"""
-Given an argument that's not a string
-Returns a TypeError
-"""
-with pytest.raises(TypeError) as e:
-    diary_entry = DiaryEntry(3.12, "contents")
-error_message = str(e.value)
-assert error_message == "Please only input valid strings"
-```
-
-```python
-"""
-Given an empty string as an argument
-Returns a ValueError
-"""
-with pytest.raises(ValueError) as e:
-    diary_entry = DiaryEntry("", "Contents")
-error_message = str(e.value)
-assert error_message == "Title cannot be empty"
-```
-
-```python
-"""
 On instantiation
 Ensure self.entries is initialised.
 """
@@ -298,4 +215,87 @@ with pytest.raises(TypeError) as e:
     diary.add("contents")
 error_message = str(e.value)
 assert error_message == "Please input a valid instance of DiaryEntry"
+```
+
+```python
+"""
+Given a title and contents
+Check params are stored to the instance
+"""
+diary_entry = DiaryEntry("title", "contents")
+
+assert diary_entry.title == "title"
+assert diary_entry.contents == "contents"
+```
+
+```python
+"""
+Given a title and contents
+Returns the word count of contents
+"""
+diary_entry = DiaryEntry("Wed 3 Dec", "50 words")
+
+assert diary_entry.count_words() == 50
+```
+
+```python
+"""
+Given an int representing words per minute
+Returns an estimated reading time for the contents
+"""
+diary_entry = DiaryEntry("Wed 3 Dec", "500 words.")
+
+assert diary_entry.reading_time(100) == 5.0
+assert diary_entry.reading_time(250) == 2.5
+assert diary_entry.reading_time(500) == 1.0
+```
+
+```python
+"""
+Given an int for reading words per minute and an int for minutes available to read
+returns a snippet of the contents that the reader can read in the available time to read
+"""
+diary_entry = DiaryEntry("Wed 3 Dec", "500 words.")
+
+assert diary_entry.reading_chunk(10, 5) == "First 50 words"
+
+"""
+Continuation of the above test
+Returns a block of text, but skips what has already been given until the contents has been fully passed to user.
+"""
+assert diary_entry.reading_chunk(10, 5) == "Next 50 words"
+
+assert diary_entry.reading_chunk(10, 10) == "Next 100 words"
+
+assert diary_entry.reading_chunk(10, 10) == "Next 100 words"
+
+assert diary_entry.reading_chunk(10, 20) == "Final 200 words"
+
+"""
+Continuation of the initial test
+Once all contents has been given, it should return to the start
+"""
+assert diary_entry.reading_chunk(10, 5) == "First 50 words"
+```
+
+```python
+"""
+Given an argument that's not a string
+Returns a TypeError
+"""
+with pytest.raises(TypeError) as e:
+    diary_entry = DiaryEntry(3.12, "contents")
+error_message = str(e.value)
+assert error_message == "Please only input valid strings"
+```
+
+```python
+"""
+Given an empty string as an argument
+Returns a ValueError
+"""
+with pytest.raises(ValueError) as e:
+    diary_entry = DiaryEntry("", "Contents")
+error_message = str(e.value)
+assert error_message == "Title cannot be empty"
 ```
