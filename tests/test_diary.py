@@ -41,7 +41,6 @@ def test_returns_list_of_diary_instances():
 
     assert diary.all() == [diary_entry1, diary_entry2, diary_entry3, diary_entry4]
 
-@pytest.mark.skip(reason="Waiting for DiaryEntry.count_words()")
 def test_word_count_of_diary_entry_contents():
     """
     When count_words is called
