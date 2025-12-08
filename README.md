@@ -195,6 +195,17 @@ assert error_message == "Please only input valid strings"
 
 ```python
 """
+Given an empty string as an argument
+Returns a ValueError
+"""
+with pytest.raises(ValueError) as e:
+    diary_entry = DiaryEntry("", "Contents")
+error_message = str(e.value)
+assert error_message == "Title cannot be empty"
+```
+
+```python
+"""
 On instantiation
 Ensure self.entries is initialised.
 """
@@ -210,7 +221,7 @@ Ensure the diary entry is added to self.entries
 diary = Diary()
 diary_entry = DiaryEntry("title", "contents")
 
-assert diary.add(diary_entry) == [['title', 'contents']]
+assert diary_entry in diary.entries
 ```
 
 ```python
@@ -229,7 +240,22 @@ diary.add(diary_entry2)
 diary.add(diary_entry3)
 diary.add(diary_entry4)
 
-assert diary.all() == [["title1", "contents1"], ["title2", "contents2"], ["title3", "contents3"], ["title4", "contents4"]]
+assert diary.all() == [diary_entry1, diary_entry2, diary_entry3, diary_entry4]
+```
+
+```python
+"""
+When count_words is called
+Return an integer of the summation of all diary_entry.contents
+"""
+diary = Diary
+diary_entry1 = DiaryEntry("title1", "contents of 500 words")
+diary_entry2 = DiaryEntry("title2", "contents of 250 words")
+
+diary.add(diary_entry1)
+diary.add(diary_entry2)
+
+assert diary.count_words == 750
 ```
 
 ```python
@@ -259,7 +285,7 @@ diary_entry2 = DiaryEntry("title2", "contents of 502 words")
 diary.add(diary_entry1)
 diary.add(diary_entry2)
 
-assert diary.find_best_entry_for_reading_time(100, 5) == "contents of 498 words"
+assert diary.find_best_entry_for_reading_time(100, 5) == diary_entry1
 assert diary.find_best_entry_for_reading_time(100, 3) == None
 ```
 
