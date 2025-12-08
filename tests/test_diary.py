@@ -21,3 +21,21 @@ def test_diary_entries_added_to_entries_list():
     diary.add(diary_entry)
 
     assert diary_entry in diary.entries
+
+def test_returns_list_of_diary_instances():
+    """
+    When instances of DiaryEntry are added to the list
+    Return a list of the DiaryEntry instances
+    """
+    diary = Diary()
+    diary_entry1 = DiaryEntry("title1", "contents1")
+    diary_entry2 = DiaryEntry("title2", "contents2")
+    diary_entry3 = DiaryEntry("title3", "contents3")
+    diary_entry4 = DiaryEntry("title4", "contents4")
+
+    diary.add(diary_entry1)
+    diary.add(diary_entry2)
+    diary.add(diary_entry3)
+    diary.add(diary_entry4)
+
+    assert diary.all() == [diary_entry1, diary_entry2, diary_entry3, diary_entry4]
