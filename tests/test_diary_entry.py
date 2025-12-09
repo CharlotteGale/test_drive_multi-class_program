@@ -78,4 +78,4 @@ def test_raises_value_error_on_empty_string():
     with pytest.raises(ValueError) as e:
         diary_entry = DiaryEntry("", "Contents")
     error_message = str(e.value)
-    assert error_message == "Title cannot be empty"
+    assert error_message == "Title and contents cannot be empty"

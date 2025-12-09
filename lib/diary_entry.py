@@ -2,6 +2,10 @@ class DiaryEntry():
     def __init__(self, title, contents):
         if not isinstance(title, str) or not isinstance(contents, str):
             raise TypeError("Please only input valid strings")
+        
+        if title == "" or contents == "":
+            raise ValueError("Title and contents cannot be empty") 
+        
         self.title = title
         self.contents = contents
         self.current_position = 0
