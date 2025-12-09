@@ -31,3 +31,31 @@ def test_return_estimated_reading_time_for_contents():
     assert diary_entry.reading_time(100) == 5.0
     assert diary_entry.reading_time(250) == 2.0
     assert diary_entry.reading_time(500) == 1.0
+
+def test_returns_chunk_and_updates_index_then_restarts():
+    """
+    Given an int for reading words per minute and an int for minutes available to read
+    returns a snippet of the contents that the reader can read in the available time to read
+    """
+    contents_500 = generate_numbered_contents(500)
+    diary_entry = DiaryEntry("Wed 3 Dec", contents_500)
+
+    assert diary_entry.reading_chunk(10, 5) == " ".join(contents_500.split()[ : 50]) # 50
+
+    """
+    Continuation of the above test
+    Returns a block of text, but skips what has already been given until the contents has been fully passed to user.
+    """
+    assert diary_entry.reading_chunk(10, 5) == " ".join(contents_500.split()[50 : 100]) # 50
+
+    assert diary_entry.reading_chunk(10, 10) == " ".join(contents_500.split()[100 : 200]) # 100
+
+    assert diary_entry.reading_chunk(10, 10) == " ".join(contents_500.split()[200 : 300]) # 100
+
+    assert diary_entry.reading_chunk(10, 20) == " ".join(contents_500.split()[300 : 500]) # 200
+
+    """
+    Continuation of the initial test
+    Once all contents has been given, it should return to the start
+    """
+    assert diary_entry.reading_chunk(10, 5) == " ".join(contents_500.split()[ : 50]) # 50
