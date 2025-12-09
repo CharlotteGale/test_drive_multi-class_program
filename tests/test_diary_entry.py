@@ -20,3 +20,14 @@ def test_word_count_of_contents_returns_integer():
     diary_entry = DiaryEntry("Wed 3 Dec", generate_contents(50))
 
     assert diary_entry.count_words() == 50
+
+def test_return_estimated_reading_time_for_contents():
+    """
+    Given an int representing words per minute
+    Returns an estimated reading time for the contents
+    """
+    diary_entry = DiaryEntry("Wed 3 Dec", generate_contents(500))
+
+    assert diary_entry.reading_time(100) == 5.0
+    assert diary_entry.reading_time(250) == 2.0
+    assert diary_entry.reading_time(500) == 1.0
