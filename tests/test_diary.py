@@ -55,15 +55,15 @@ def test_word_count_of_diary_entry_contents():
 
     assert diary.count_words() == 750
 
-@pytest.mark.skip(reason="Waiting for DiaryEntry.count_words()")
+# @pytest.mark.skip(reason="Waiting for DiaryEntry.count_words()")
 def test_returns_how_long_to_read_all_DiaryEntry_instances_stored():
     """
     When given a reading words per minute (`wpm`)
     Return how long it will take to read all instances of DiaryEntry stored.
     """
     diary = Diary()
-    diary_entry1 = DiaryEntry("title", "contents of 500 words")
-    diary_entry2 = DiaryEntry("title2", "contents of 500 words")
+    diary_entry1 = DiaryEntry("title", generate_contents(500))
+    diary_entry2 = DiaryEntry("title2", generate_contents(500))
 
     diary.add(diary_entry1)
     diary.add(diary_entry2)
