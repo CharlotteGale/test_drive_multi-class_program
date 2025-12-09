@@ -70,3 +70,17 @@ def test_returns_how_long_to_read_all_DiaryEntry_instances_stored():
 
     assert diary.reading_time(200) == 5
 
+def test_returns_an_instance_of_DiaryEntry_that_can_be_read_in_the_given_time():
+    """
+    Given a reading wpm and minutes to read
+    Return an instance of DiaryEntry that can be read in its entirety within the given minutes.
+    """
+    diary = Diary()
+    diary_entry1 = DiaryEntry("title1", generate_contents(498))
+    diary_entry2 = DiaryEntry("title2", generate_contents(502))
+
+    diary.add(diary_entry1)
+    diary.add(diary_entry2)
+
+    assert diary.find_best_entry_for_reading_time(100, 5) == diary_entry1
+    assert diary.find_best_entry_for_reading_time(100, 3) == None

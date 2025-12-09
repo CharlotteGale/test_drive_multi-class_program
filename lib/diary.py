@@ -22,5 +22,15 @@ class Diary():
             total += entry.reading_time(wpm)
         return total
 
-    # def find_best_entry_for_reading_time(self, wpm, minutes):
-    #     pass
+    def find_best_entry_for_reading_time(self, wpm, minutes):
+        best_entry = None
+
+        for entry in self.entries:
+            if entry.reading_time(wpm) <= minutes:
+                if best_entry == None:
+                    best_entry = entry
+                else:
+                    if entry > best_entry:
+                        best_entry = entry
+        
+        return best_entry
