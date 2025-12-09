@@ -5,6 +5,9 @@ class Diary():
         self.entries = []
         
     def add(self, entry):
+        if not isinstance(entry, DiaryEntry):
+            raise TypeError("Please input a valid instance of DiaryEntry")
+        
         self.entries.append(entry)
 
     def all(self):
