@@ -59,3 +59,23 @@ def test_returns_chunk_and_updates_index_then_restarts():
     Once all contents has been given, it should return to the start
     """
     assert diary_entry.reading_chunk(10, 5) == " ".join(contents_500.split()[ : 50]) # 50
+
+def test_raises_type_error_if_not_passed_string():
+    """
+    Given an argument that's not a string
+    Returns a TypeError
+    """
+    with pytest.raises(TypeError) as e:
+        diary_entry = DiaryEntry(3.12, "contents")
+    error_message = str(e.value)
+    assert error_message == "Please only input valid strings"
+
+def test_raises_value_error_on_empty_string():
+    """
+    Given an empty string as an argument
+    Returns a ValueError
+    """
+    with pytest.raises(ValueError) as e:
+        diary_entry = DiaryEntry("", "Contents")
+    error_message = str(e.value)
+    assert error_message == "Title cannot be empty"
